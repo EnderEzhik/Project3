@@ -1,0 +1,14 @@
+body {
+    height: 100vh;
+    background-color: rgb(33 37 41);
+}
+
+.logo-text {
+    text-align: center;
+    margin: 0;
+    color: rgb(248 249 250);
+}
+
+.logo-text h1{
+    margin-bottom: 2vh;
+}

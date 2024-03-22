@@ -1,0 +1,31 @@
+.btn-back {
+    margin-top: 1%;
+    margin-left: 1%;
+}
+
+.accounts {
+    width: 50%;
+    height: 50%;
+    overflow: auto;
+    position: absolute;
+    left: 25%;
+    right: 25%;
+    top: 25%;
+    bottom: 25%;
+}
+
+.accounts ul {
+    width: 98%;
+    margin-top: 1%;
+    margin-left: 1%;
+    margin-bottom: 1%;
+    padding: 0%;
+}
+
+.account {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5%;
+    color: rgb(248 249 250);
+}
