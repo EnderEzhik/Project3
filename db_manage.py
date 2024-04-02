@@ -14,9 +14,9 @@
 """
 
 from data import db_session
-from data.Account import Account
-from data.BlackList import BlackList
-from data.WhiteList import WhiteList
+from data.Models.Account import Account
+from data.Models.BlackList import BlackList
+from data.Models.WhiteList import WhiteList
 
 
 db_session.global_init("db/accounts.db")
@@ -56,6 +56,9 @@ def add_to_white_list(user_id):
 
 def get_accounts():
     return db.query(Account).all()
+
+def get_account(chat_id):
+    return db.query(Account).filter(Account.user_id == chat_id).first()
 
 def get_black_list():
     accounts = list()

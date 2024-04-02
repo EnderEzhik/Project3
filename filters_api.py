@@ -8,7 +8,6 @@ blueprint = flask.Blueprint("filters_api", __name__, template_folder="templates"
 @blueprint.route("/filters")
 def filters():
     content = dict()
-    content["accounts"] = get_accounts()
     content["black_list"] = get_black_list()
     content["white_list"] = get_white_list()
 

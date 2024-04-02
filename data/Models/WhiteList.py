@@ -1,11 +1,11 @@
 import sqlalchemy
 from sqlalchemy import orm
 
-from .db_session import SqlAlchemyBase
+from data.db_session import SqlAlchemyBase
 
 
-class BlackList(SqlAlchemyBase):
-    __tablename__ = "BlackList"
+class WhiteList(SqlAlchemyBase):
+    __tablename__ = "WhiteList"
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
     user_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("Accounts.user_id"), unique=True)
