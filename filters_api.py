@@ -1,6 +1,8 @@
 import flask
+
 from flask import render_template, redirect
 from db_manage import *
+
 
 blueprint = flask.Blueprint("filters_api", __name__, template_folder="templates")
 
