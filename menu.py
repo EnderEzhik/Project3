@@ -2,6 +2,7 @@ import filters_api, chats_api
 
 from flask import Flask, render_template
 
+
 app = Flask(__name__)
 
 
