@@ -1,0 +1,19 @@
+form {
+    margin: auto auto auto auto;
+    width: 30%;
+    height: 40%;
+}
+
+.button {
+    text-align: center;
+}
+
+.message {
+    text-align: center;
+    margin: 0;
+    color: rgb(248 249 250);
+}
+
+label {
+    color: rgb(248 249 250);
+}

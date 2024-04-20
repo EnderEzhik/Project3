@@ -1,0 +1,13 @@
+form {
+    margin: auto auto auto auto;
+    width: 30%;
+    height: 40%;
+}
+
+.button {
+    text-align: center;
+}
+
+label {
+    color: rgb(248 249 250);
+}

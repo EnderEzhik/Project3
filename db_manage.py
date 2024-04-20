@@ -19,56 +19,88 @@ from data.Models.BlackList import BlackList
 from data.Models.WhiteList import WhiteList
 
 
-db_session.global_init("db/accounts.db")
+db_file = "db/accounts.db"
+
+
+db_session.global_init(db_file)
 db = db_session.create_session()
 
 def fill_database(accounts):
     for account in accounts:
-        if db.query(Account).filter(Account.user_id == account["user_id"]).first() is None:
-            db.add(Account(user_id=account["user_id"], fname=account["fname"], lname=account["lname"], username=account["username"], names=account["names"]))
+        user_id = account["user_id"]
+        if db.query(Account).filter(Account.user_id == user_id).first() is None:
+            fname = account["fname"]
+            lname = account["lname"]
+            username = account["username"]
+            names = account["names"]
+
+            db.add(Account(user_id=user_id, 
+                           fname=fname, 
+                           lname=lname, 
+                           username=username, 
+                           names=names))
     db.commit()
     db.close()
     return
 
 def exist_in_database(user_id):
-    return db.query(Account).filter(Account.user_id == user_id).first() is not None
+    exist = db.query(Account).filter(Account.user_id == user_id).first() is not None
+    return exist
 
 def exist_in_black_list(user_id):
-    return db.query(BlackList).filter(BlackList.user_id == user_id).first() is not None
+    exist = db.query(BlackList).filter(BlackList.user_id == user_id).first() is not None
+    return exist
 
 def exist_in_white_list(user_id):
-    return db.query(WhiteList).filter(WhiteList.user_id == user_id).first() is not None
+    exist = db.query(WhiteList).filter(WhiteList.user_id == user_id).first() is not None
+    return exist
 
-def add_to_database(user_id, fname, lname, username):
+def add_to_database(user_id, fname, lname, username, names):
     if exist_in_database(user_id) == False:
-        db.add(Account(user_id=user_id, fname=fname, lname=lname, username=username))
+        db.add(Account(user_id=user_id, 
+                       fname=fname, 
+                       lname=lname, 
+                       username=username, 
+                       names=names))
         db.commit()
 
 def add_to_black_list(user_id):
     if exist_in_black_list(user_id) == False:
-        db.add(BlackList(user_id=user_id))
+        user = BlackList(user_id=user_id)
+        db.add(user)
         db.commit()
 
 def add_to_white_list(user_id):
     if exist_in_white_list(user_id) == False:
-        db.add(WhiteList(user_id=user_id))
+        user = WhiteList(user_id=user_id)
+        db.add(user)
         db.commit()
 
 def get_accounts():
-    return db.query(Account).all()
+    accounts = db.query(Account).all()
+    return accounts
 
 def get_account(chat_id):
-    return db.query(Account).filter(Account.user_id == chat_id).first()
+    account = db.query(Account).get(chat_id) #.filter(Account.user_id == chat_id).first()
+    return account
 
 def get_black_list():
     accounts = list()
     for elem in db.query(BlackList).all():
         account = dict()
-        account["user_id"] = elem.user_id
-        account["fname"] = db.query(Account).filter(Account.user_id == elem.user_id).first().fname
-        account["lname"] = db.query(Account).filter(Account.user_id == elem.user_id).first().lname
-        account["username"] = db.query(Account).filter(Account.user_id == elem.user_id).first().username
-        account["names"] = db.query(Account).filter(Account.user_id == elem.user_id).first().names
+
+        user = db.query(Account).filter(Account.user_id == elem.user_id).first()
+        user_id = user.user_id
+        fname = user.fname
+        lname = user.lname
+        username = user.username
+        names = user.names
+
+        account["user_id"] = user_id
+        account["fname"] = fname
+        account["lname"] = lname
+        account["username"] = username
+        account["names"] = names
         accounts.append(account)
     return accounts
 
@@ -76,11 +108,19 @@ def get_white_list():
     accounts = list()
     for elem in db.query(WhiteList).all():
         account = dict()
-        account["user_id"] = elem.user_id
-        account["fname"] = db.query(Account).filter(Account.user_id == elem.user_id).first().fname
-        account["lname"] = db.query(Account).filter(Account.user_id == elem.user_id).first().lname
-        account["username"] = db.query(Account).filter(Account.user_id == elem.user_id).first().username
-        account["names"] = db.query(Account).filter(Account.user_id == elem.user_id).first().names
+
+        user = db.query(Account).filter(Account.user_id == elem.user_id).first()
+        user_id = user.user_id
+        fname = user.fname
+        lname = user.lname
+        username = user.username
+        names = user.names
+
+        account["user_id"] = user_id
+        account["fname"] = fname
+        account["lname"] = lname
+        account["username"] = username
+        account["names"] = names
         accounts.append(account)
     return accounts
 
