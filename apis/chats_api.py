@@ -22,7 +22,6 @@ def all_chats():
         return redirect("/register")
     
     chats = requests.get("http://127.0.0.1:8080/api/accounts").json()
-    print(chats)
 
     return render_template("chats.html", chats=chats)
 
